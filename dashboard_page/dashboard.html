@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>InterviewIQ AI · Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body>
+
+    <!-- ============================================================
+    SIDEBAR OVERLAY
+    ============================================================ -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- ============================================================
+    DASHBOARD WRAPPER
+    ============================================================ -->
+    <div class="dash-wrapper">
+
+        <!-- ============================================================
+        SIDEBAR
+        ============================================================ -->
+        <aside class="dash-sidebar" id="dashSidebar">
+            <div class="sidebar-brand">
+                <span class="brand-icon">⚡</span>
+                <span class="brand-name">InterviewIQ AI</span>
+            </div>
+
+            <nav class="sidebar-nav" id="sidebarNav">
+                <a href="#" class="nav-item active" data-section="dashboard"><i class="fas fa-th-large"></i> Dashboard</a>
+                <a href="#" class="nav-item" data-section="resume-analyzer"><i class="fas fa-file-alt"></i> AI Resume Analyzer</a>
+                <a href="#" class="nav-item" data-section="ats-checker"><i class="fas fa-check-double"></i> ATS Resume Checker</a>
+                <a href="#" class="nav-item" data-section="resume-optimizer"><i class="fas fa-magic"></i> Resume Optimizer</a>
+                <a href="#" class="nav-item" data-section="cover-letter"><i class="fas fa-envelope"></i> Cover Letter Generator</a>
+                <a href="#" class="nav-item" data-section="job-description"><i class="fas fa-briefcase"></i> Job Description Analyzer</a>
+                <a href="#" class="nav-item" data-section="skill-gap"><i class="fas fa-chart-pie"></i> Skill Gap Analysis</a>
+                <a href="#" class="nav-item" data-section="roadmap"><i class="fas fa-route"></i> Career Roadmap</a>
+                <a href="#" class="nav-item" data-section="mock-interviews"><i class="fas fa-microphone-alt"></i> AI Mock Interview</a>
+                <a href="#" class="nav-item" data-section="analytics"><i class="fas fa-chart-line"></i> Interview Analytics</a>
+                <a href="#" class="nav-item" data-section="achievements"><i class="fas fa-trophy"></i> Achievements</a>
+                <a href="#" class="nav-item" data-section="profile"><i class="fas fa-user"></i> Profile</a>
+                <a href="#" class="nav-item" data-section="settings"><i class="fas fa-cog"></i> Settings</a>
+                <a href="#" class="nav-item logout" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <span>v2.0 · Early Access</span>
+            </div>
+        </aside>
+
+        <!-- ============================================================
+        MAIN CONTENT
+        ============================================================ -->
+        <main class="dash-main">
+
+            <!-- ============================================================
+            TOP NAVBAR
+            ============================================================ -->
+            <header class="dash-topbar">
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <div class="topbar-search">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search interviews, resumes, skills..." id="globalSearch" />
+                </div>
+
+                <div class="topbar-actions">
+                    <button class="icon-btn" id="notifBtn" aria-label="Notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge-dot"></span>
+                    </button>
+                    <button class="icon-btn" id="themeToggle" aria-label="Toggle theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <div class="user-profile-mini">
+                        <div class="avatar" id="avatarInitial">A</div>
+                        <div>
+                            <div class="user-name" id="userNameDisplay">Admin</div>
+                            <div class="user-role" id="userRoleDisplay">Administrator</div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- ============================================================
+            WELCOME BANNER
+            ============================================================ -->
+            <section class="dash-section" id="dashboard">
+                <div class="welcome-banner">
+                    <div class="greeting">
+                        <h1 id="welcomeGreeting">Good Morning, Admin 👋</h1>
+                        <p id="welcomeSub">Ready to ace your next interview? You're doing great!</p>
+                        <div class="quote">💡 "Success is where preparation and opportunity meet."</div>
+                    </div>
+                    <div class="streak-box">
+                        <div class="streak-item">
+                            <div class="num">12</div>
+                            <div class="label">Day Streak</div>
+                        </div>
+                        <div class="streak-item">
+                            <div class="num">5</div>
+                            <div class="label">Today's Goal</div>
+                        </div>
+                        <div class="progress-ring">
+                            <div class="inner">72%</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================
+            QUICK STATS
+            ============================================================ -->
+            <section class="dash-section">
+                <div class="grid-4">
+                    <div class="dash-card">
+                        <div class="stat-row">
+                            <div>
+                                <div class="card-title">Resume Score</div>
+                                <div class="card-value"><span class="accent">72</span>%</div>
+                                <div class="card-sub">↑ 8% this week</div>
+                            </div>
+                            <span class="card-icon"><i class="fas fa-file-alt"></i></span>
+                        </div>
+                    </div>
+                    <div class="dash-card">
+                        <div class="stat-row">
+                            <div>
+                                <div class="card-title">ATS Score</div>
+                                <div class="card-value"><span class="accent">88</span>%</div>
+                                <div class="card-sub">↑ 5% this week</div>
+                            </div>
+                            <span class="card-icon"><i class="fas fa-check-circle"></i></span>
+                        </div>
+                    </div>
+                    <div class="dash-card">
+                        <div class="stat-row">
+                            <div>
+                                <div class="card-title">Interview Readiness</div>
+                                <div class="card-value"><span class="accent">65</span>%</div>
+                                <div class="card-sub">↑ 12% this week</div>
+                            </div>
+                            <span class="card-icon"><i class="fas fa-rocket"></i></span>
+                        </div>
+                    </div>
+                    <div class="dash-card">
+                        <div class="stat-row">
+                            <div>
+                                <div class="card-title">Confidence Score</div>
+                                <div class="card-value"><span class="accent">55</span>%</div>
+                                <div class="card-sub">↑ 3% this week</div>
+                            </div>
+                            <span class="card-icon"><i class="fas fa-brain"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================
+            QUICK ACTIONS
+            ============================================================ -->
+            <section class="dash-section">
+                <div class="section-header">
+                    <h2>Quick Actions</h2>
+                </div>
+                <div class="quick-action-grid">
+                    <div class="quick-action-item" data-action="upload">
+                        <span class="icon"><i class="fas fa-upload"></i></span>
+                        <span class="label">Upload Resume</span>
+                    </div>
+                    <div class="quick-action-item" data-action="analyze">
+                        <span class="icon"><i class="fas fa-search"></i></span>
+                        <span class="label">Analyze Resume</span>
+                    </div>
+                    <div class="quick-action-item" data-action="optimize">
+                        <span class="icon"><i class="fas fa-magic"></i></span>
+                        <span class="label">Optimize Resume</span>
+                    </div>
+                    <div class="quick-action-item" data-action="cover">
+                        <span class="icon"><i class="fas fa-envelope"></i></span>
+                        <span class="label">Generate Cover Letter</span>
+                    </div>
+                    <div class="quick-action-item" data-action="mock">
+                        <span class="icon"><i class="fas fa-microphone-alt"></i></span>
+                        <span class="label">Start Mock Interview</span>
+                    </div>
+                    <div class="quick-action-item" data-action="coding">
+                        <span class="icon"><i class="fas fa-code"></i></span>
+                        <span class="label">Practice Coding</span>
+                    </div>
+                    <div class="quick-action-item" data-action="roadmap">
+                        <span class="icon"><i class="fas fa-route"></i></span>
+                        <span class="label">View Career Roadmap</span>
+                    </div>
+                    <div class="quick-action-item" data-action="jobdesc">
+                        <span class="icon"><i class="fas fa-briefcase"></i></span>
+                        <span class="label">Analyze Job Description</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================
+            AI RESUME ANALYZER
+            ============================================================ -->
+            <section class="dash-section" id="resume-analyzer">
+                <div class="section-header">
+                    <h2>AI Resume Analyzer</h2>
+                </div>
+                <div class="grid-2">
+                    <div class="dash-card">
+                        <div class="upload-area" id="resumeUploadArea">
+                            <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                            <div class="text">Upload your resume (PDF, DOCX)</div>
+                            <div style="font-size:0.7rem;color:#9ca3af;margin-top:4px;">or drag and drop</div>
+                            <input type="file" id="resumeFileInput" accept=".pdf,.docx" style="display:none;" />
+                        </div>
+                        <div style="margin-top:16px;">
+                            <div class="skill-bar">
+                                <div class="skill-label"><span>Resume Score</span><span>72%</span></div>
+                                <div class="track"><div class="fill" style="width:72%;"></div></div>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-label"><span>ATS Compatibility</span><span>88%</span></div>
+                                <div class="track"><div class="fill" style="width:88%;"></div></div>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-label"><span>Grammar</span><span>65%</span></div>
+                                <div class="track"><div class="fill" style="width:65%;"></div></div>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-label"><span>Formatting</span><span>90%</span></div>
+                                <div class="track"><div class="fill" style="width:90%;"></div></div>
+                            </div>
+                        </div>
+                        <div style="margin-top:16px;padding:14px 18px;background:rgba(108,99,255,0.04);border-radius:16px;">
+                            <strong style="font-size:0.8rem;">Missing Keywords:</strong>
+                            <span style="font-size:0.8rem;color:#6b7280;">Python, Django, AWS, React</span>
+                        </div>
+                        <button style="margin-top:16px;padding:10px 24px;border-radius:60px;border:none;background:#6C63FF;color:#fff;font-weight:600;font-size:0.85rem;width:100%;transition:all 0.3s;" id="improveResumeBtn">
+                            <i class="fas fa-wand-magic-sparkles"></i> Improve Resume
+                        </button>
+                    </div>
+                    <div class="dash-card">
+                        <div class="card-title">Suggestions</div>
+                        <ul style="list-style:none;padding:0;margin-top:8px;">
+                            <li style="padding:8px 0;border-bottom:1px solid rgba(108,99,255,0.03);font-size:0.85rem;">✅ Add more quantifiable achievements</li>
+                            <li style="padding:8px 0;border-bottom:1px solid rgba(108,99,255,0.03);font-size:0.85rem;">✅ Include relevant keywords from job description</li>
+                            <li style="padding:8px 0;border-bottom:1px solid rgba(108,99,255,0.03);font-size:0.85rem;">✅ Improve summary section with impact statements</li>
+                            <li style="padding:8px 0;font-size:0.85rem;">✅ Add technical skills section</li>
+                        </ul>
+                        <div style="margin-top:12px;padding:12px 16px;background:rgba(52,211,153,0.06);border-radius:16px;border:1px solid rgba(52,211,153,0.06);">
+                            <span style="font-size:0.8rem;color:#059669;"><i class="fas fa-check-circle"></i> 4 improvements suggested</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================
+            ATS RESUME CHECKER
+            ============================================================ -->
+            <section class="dash-section" id="ats-checker">
+                <div class="section-header">
+                    <h2>ATS Resume Checker</h2>
+                </div>
+                <div class="grid-2">
+                    <div class="dash-card">
+                        <div style="display:flex;justify-content:space-between;align-items:center;">
+                            <div>
+                                <div class="card-title">ATS Score</div>
+                                <div class="card-value"><span class="accent">88</span>%</div>
+                            </div>
+                            <div style="width:80px;height:80px;border-radius:50%;background:conic-gradient(#34d399 0% 88%, #e5e7eb 88% 100%);display:flex;align-items:center;justify-content:center;">
+                                <div style="width:60px;height:60px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.1rem;color:#34d399;">88%</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dash-card">
+                        <div class="card-title">Compatibility Meter</div>
+                        <div style="margin-top:12px;">
+                            <div class="skill-bar">
+                                <div class="skill-label"><span>Keywords Found</span><span>18/24</span></div>
+                                <div class="track"><div class="fill" style="width:75%;"></div></div>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-label"><span>Formatting</span><span>Pass</span></div>
+                                <div class="track"><div class="fill" style="width:100%;background:#34d399;"></div></div>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-label"><span>Readability</span><span>92%</span></div>
+                                <div class="track"><div class="fill" style="width:92%;"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================
+            JOB DESCRIPTION ANALYZER
+            ============================================================ -->
+            <section class="dash-section" id="job-description">
+                <div class="section-header">
+                    <h2>Job Description Analyzer</h2>
+                </div>
+                <div class="grid-2">
+                    <div class="dash-card">
+                        <div style="display:flex;gap:12px;flex-direction:column;">
+                            <textarea placeholder="Paste job description here..." id="jdTextarea" style="width:100%;min-height:140px;border-radius:16px;border:1px solid rgba(108,99,255,0.06);padding:14px 16px;font-family:inherit;font-size:0.85rem;resize:vertical;background:rgba(255,255,255,0.4);outline:none;transition:all 0.3s;"></textarea>
+                            <button style="padding:12px 24px;border-radius:60px;border:none;background:#6C63FF;color:#fff;font-weight:600;font-size:0.85rem;transition:all 0.3s;" id="analyzeJdBtn">
+                                <i class="fas fa-search"></i> Analyze
+                            </button>
+                        </div>
+                    </div>
+                    <div class="dash-card">
+                        <div class="card-title">Match Results</div>
+                        <div style="margin-top:12px;">
+                            <div class="skill-bar">
+                                <div class="skill-label"><span>Match Percentage</span><span>72%</span></div>
+                                <div class="track"><div class="fill" style="width:72%;"></div></div>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-label"><span>Required Skills</span><span>12 found</span></div>
+                                <div class="track"><div class="fill" style="width:75%;"></div></div>
+                            </div>
+                            <div style="margin-top:12px;padding:12px 16px;background:rgba(239,68,68,0.04);border-radius:16px;border:1px solid rgba(239,68,68,0.04);">
+                                <span style="font-size:0.8rem;color:#ef4444;"><i class="fas fa-exclamation-triangle"></i> Missing: Python, Django, AWS</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================
+            SKILL GAP ANALYSIS
+            ============================================================ -->
+            <section class="dash-section" id="skill-gap">
+                <div class="section-header">
+                    <h2>Skill Gap Analysis</h2>
+                </div>
+                <div class="grid-2">
+                    <div class="dash-card">
+                        <div class="card-title">Technical Skills</div>
+                        <div class="skill-bar">
+                            <div class="skill-label"><span>Python</span><span>75%</span></div>
+                            <div class="track"><div class="fill" style="width:75%;"></div></div>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-label"><span>JavaScript</span><span>65%</span></div>
+                            <div class="track"><div class="fill" style="width:65%;"></div></div>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-label"><span>React</span><span>45%</span></div>
+                            <div class="track"><div class="fill" style="width:45%;"></div></div>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-label"><span>Django</span><span>30%</span></div>
+                            <div class="track"><div class="fill" style="width:30%;"></div></div>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-label"><span>AWS</span><span>20%</span></div>
+                            <div class="track"><div class="fill" style="width:20%;"></div></div>
+                        </div>
+                    </div>
+                    <div class="dash-card">
+                        <div class="card-title">Soft Skills</div>
+                        <div class="skill-bar">
+                            <div class="skill-label"><span>Communication</span><span>70%</span></div>
+                            <div class="track"><div class="fill" style="width:70%;"></div></div>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-label"><span>Problem Solving</span><span>60%</span></div>
+                            <div class="track"><div class="fill" style="width:60%;"></div></div>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-label"><span>Leadership</span><span>45%</span></div>
+                            <div class="track"><div class="fill" style="width:45%;"></div></div>
+                        </div>
+                        <div style="margin-top:16px;padding:14px 16px;background:rgba(108,99,255,0.04);border-radius:16px;">
+                            <strong style="font-size:0.8rem;">Recommended Learning:</strong>
+                            <ul style="list-style:none;padding:0;margin-top:4px;font-size:0.8rem;color:#6b7280;">
+                                <li>📚 DSA Foundation Course</li>
+                                <li>📚 System Design Mastery</li>
+                                <li>📚 AWS Certified Developer</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================
+            CAREER ROADMAP
+            ============================================================ -->
+            <section class="dash-section" id="roadmap">
+                <div class="section-header">
+                    <h2>Career Roadmap</h2>
+                </div>
+                <div class="dash-card">
+                    <div style="padding:4px 0;">
+                        <div style="display:flex;gap:16px;padding:12px 0;border-bottom:1px solid rgba(108,99,255,0.03);">
+                            <span style="font-size:0.7rem;color:#9ca3af;min-width:80px;">Completed</span>
+                            <span style="font-size:0.85rem;"><strong>✅ Resume Optimized</strong> — ATS score 88%</span>
+                        </div>
+                        <div style="display:flex;gap:16px;padding:12px 0;border-bottom:1px solid rgba(108,99,255,0.03);">
+                            <span style="font-size:0.7rem;color:#9ca3af;min-width:80px;">In Progress</span>
+                            <span style="font-size:0.85rem;"><strong>🎯 Mock Interviews</strong> — 5/10 completed</span>
+                        </div>
+                        <div style="display:flex;gap:16px;padding:12px 0;border-bottom:1px solid rgba(108,99,255,0.03);">
+                            <span style="font-size:0.7rem;color:#9ca3af;min-width:80px;">Next Milestone</span>
+                            <span style="font-size:0.85rem;"><strong>🚀 Technical Interview Prep</strong> — DSA + System Design</span>
+                        </div>
+                        <div style="display:flex;gap:16px;padding:12px 0;">
+                            <span style="font-size:0.7rem;color:#9ca3af;min-width:80px;">Future Goal</span>
+                            <span style="font-size:0.85rem;"><strong>💼 Dream Job</strong> — Senior Software Engineer</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================
+            AI MOCK INTERVIEW
+            ============================================================ -->
+            <section class="dash-section" id="mock-interviews">
+                <div class="section-header">
+                    <h2>AI Mock Interview</h2>
+                </div>
+                <div class="grid-3">
+                    <div class="interview-card">
+                        <span class="type">HR</span>
+                        <div class="title">HR Interview</div>
+                        <div class="meta">⭐ Easy · 20 min · 8 questions</div>
+                        <button class="btn-start" data-interview="hr">Start <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                    <div class="interview-card">
+                        <span class="type">Technical</span>
+                        <div class="title">Technical Interview</div>
+                        <div class="meta">⭐ Medium · 45 min · 12 questions</div>
+                        <button class="btn-start" data-interview="technical">Start <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                    <div class="interview-card">
+                        <span class="type">Behavioral</span>
+                        <div class="title">Behavioral Interview</div>
+                        <div class="meta">⭐ Medium · 30 min · 10 questions</div>
+                        <button class="btn-start" data-interview="behavioral">Start <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                    <div class="interview-card">
+                        <span class="type">Coding</span>
+                        <div class="title">Coding Interview</div>
+                        <div class="meta">⭐ Hard · 60 min · 5 problems</div>
+                        <button class="btn-start" data-interview="coding">Start <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                    <div class="interview-card">
+                        <span class="type">Voice</span>
+                        <div class="title">Voice Interview</div>
+                        <div class="meta">⭐ Easy · 20 min · 6 questions</div>
+                        <button class="btn-start" data-interview="voice">Start <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                    <div class="interview-card">
+                        <span class="type">Video</span>
+                        <div class="title">Video Interview</div>
+                        <div class="meta">⭐ Medium · 30 min · 8 questions</div>
+                        <button class="btn-start" data-interview="video">Start <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================
+            INTERVIEW RESULTS
+            ============================================================ -->
+            <section class="dash-section">
+                <div class="section-header">
+                    <h2>Recent Interview Results</h2>
+                </div>
+                <div class="grid-3">
+                    <div class="dash-card">
+                        <div style="display:flex;justify-content:space-between;">
+                            <div>
+                                <div class="card-title">Technical Interview</div>
+                                <div style="font-weight:600;">Score: <span style="color:#6C63FF;">78%</span></div>
+                            </div>
+                            <span style="font-size:0.7rem;color:#9ca3af;">2 days ago</span>
+                        </div>
+                        <p style="font-size:0.8rem;color:#6b7280;margin:6px 0;">Good problem-solving skills. Need more practice on complex algorithms.</p>
+                        <button style="padding:6px 16px;border-radius:40px;border:1px solid rgba(108,99,255,0.1);background:transparent;color:#6C63FF;font-weight:600;font-size:0.75rem;transition:all 0.3s;" class="retry-btn" data-retry="technical">
+                            <i class="fas fa-redo"></i> Retry
+                        </button>
+                    </div>
+                    <div class="dash-card">
+                        <div style="display:flex;justify-content:space-between;">
+                            <div>
+                                <div class="card-title">HR Interview</div>
+                                <div style="font-weight:600;">Score: <span style="color:#6C63FF;">92%</span></div>
+                            </div>
+                            <span style="font-size:0.7rem;color:#9ca3af;">5 days ago</span>
+                        </div>
+                        <p style="font-size:0.8rem;color:#6b7280;margin:6px 0;">Excellent communication. Great STAR format responses.</p>
+                        <button style="padding:6px 16px;border-radius:40px;border:1px solid rgba(108,99,255,0.1);background:transparent;color:#6C63FF;font-weight:600;font-size:0.75rem;transition:all 0.3s;" class="retry-btn" data-retry="hr">
+                            <i class="fas fa-redo"></i> Retry
+                        </button>
+                    </div>
+                    <div class="dash-card">
+                        <div style="display:flex;justify-content:space-between;">
+                            <div>
+                                <div class="card-title">Coding Interview</div>
+                                <div style="font-weight:600;">Score: <span style="color:#6C63FF;">65%</span></div>
+                            </div>
+                            <span style="font-size:0.7rem;color:#9ca3af;">1 week ago</span>
+                        </div>
+                        <p style="font-size:0.8rem;color:#6b7280;margin:6px 0;">Need more practice with data structures and algorithms.</p>
+                        <button style="padding:6px 16px;border-radius:40px;border:1px solid rgba(108,99,255,0.1);background:transparent;color:#6C63FF;font-weight:600;font-size:0.75rem;transition:all 0.3s;" class="retry-btn" data-retry="coding">
+                            <i class="fas fa-redo"></i> Retry
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================
+            ANALYTICS
+            ============================================================ -->
+            <section class="dash-section" id="analytics">
+                <div class="section-header">
+                    <h2>Performance Analytics</h2>
+                </div>
+                <div class="grid-2">
+                    <div class="dash-card">
+                        <div class="card-title">Weekly Performance</div>
+                        <div class="chart-container">
+                            <canvas id="weeklyChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="dash-card">
+                        <div class="card-title">Monthly Performance</div>
+                        <div class="chart-container">
+                            <canvas id="monthlyChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================
+            ACHIEVEMENTS
+            ============================================================ -->
+            <section class="dash-section" id="achievements">
+                <div class="section-header">
+                    <h2>Achievements</h2>
+                </div>
+                <div class="badge-grid">
+                    <div class="badge-item"><span class="icon">📄</span> First Resume Uploaded</div>
+                    <div class="badge-item"><span class="icon">✅</span> ATS Passed</div>
+                    <div class="badge-item"><span class="icon">🎯</span> 10 Interviews</div>
+                    <div class="badge-item"><span class="icon">💡</span> 50 Questions Solved</div>
+                    <div class="badge-item"><span class="icon">🔥</span> 7 Day Streak</div>
+                    <div class="badge-item"><span class="icon">🏆</span> Top Performer</div>
+                </div>
+            </section>
+
+            <!-- ============================================================
+            RECENT ACTIVITY
+            ============================================================ -->
+            <section class="dash-section">
+                <div class="section-header">
+                    <h2>Recent Activity</h2>
+                </div>
+                <div class="dash-card">
+                    <div style="padding:4px 0;">
+                        <div style="display:flex;gap:16px;padding:10px 0;border-bottom:1px solid rgba(108,99,255,0.03);">
+                            <span style="font-size:0.7rem;color:#9ca3af;min-width:90px;">2 hours ago</span>
+                            <span style="font-size:0.85rem;">📄 Resume uploaded and analyzed</span>
+                        </div>
+                        <div style="display:flex;gap:16px;padding:10px 0;border-bottom:1px solid rgba(108,99,255,0.03);">
+                            <span style="font-size:0.7rem;color:#9ca3af;min-width:90px;">5 hours ago</span>
+                            <span style="font-size:0.85rem;">🎙️ Completed Technical Interview (78%)</span>
+                        </div>
+                        <div style="display:flex;gap:16px;padding:10px 0;border-bottom:1px solid rgba(108,99,255,0.03);">
+                            <span style="font-size:0.7rem;color:#9ca3af;min-width:90px;">1 day ago</span>
+                            <span style="font-size:0.85rem;">🗺️ Career roadmap updated</span>
+                        </div>
+                        <div style="display:flex;gap:16px;padding:10px 0;">
+                            <span style="font-size:0.7rem;color:#9ca3af;min-width:90px;">2 days ago</span>
+                            <span style="font-size:0.85rem;">🏆 Achievement earned: 7 Day Streak</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================
+            PROFILE SUMMARY
+            ============================================================ -->
+            <section class="dash-section" id="profile">
+                <div class="section-header">
+                    <h2>Profile Summary</h2>
+                </div>
+                <div class="dash-card">
+                    <div style="display:flex;gap:24px;align-items:center;flex-wrap:wrap;">
+                        <div style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#6C63FF,#A855F7);display:flex;align-items:center;justify-content:center;color:#fff;font-size:2rem;font-weight:700;text-transform:uppercase;" id="profileAvatar">A</div>
+                        <div>
+                            <div style="font-weight:700;font-size:1.1rem;" id="profileName">Admin</div>
+                            <div style="font-size:0.85rem;color:#6b7280;" id="profileEducation">B.Tech Computer Science · 2024</div>
+                            <div style="font-size:0.85rem;color:#6b7280;" id="profileEmail">admin@gmail.com</div>
+                            <div style="margin-top:4px;font-size:0.85rem;color:#6C63FF;font-weight:600;">Level: Intermediate · <span id="profileProgress">85</span>% Overall</div>
+                        </div>
+                        <button style="margin-left:auto;padding:8px 20px;border-radius:60px;border:1px solid rgba(108,99,255,0.1);background:transparent;color:#6C63FF;font-weight:600;font-size:0.8rem;transition:all 0.3s;" id="editProfileBtn">
+                            <i class="fas fa-edit"></i> Edit Profile
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================
+            SETTINGS PREVIEW
+            ============================================================ -->
+            <section class="dash-section" id="settings">
+                <div class="section-header">
+                    <h2>Settings</h2>
+                </div>
+                <div class="grid-3">
+                    <div class="dash-card" style="cursor:pointer;" data-setting="notifications">
+                        <div style="display:flex;align-items:center;gap:12px;">
+                            <i class="fas fa-bell" style="font-size:1.2rem;color:#6C63FF;"></i>
+                            <div>
+                                <div style="font-weight:600;">Notifications</div>
+                                <div style="font-size:0.75rem;color:#6b7280;">Email, push, in-app</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dash-card" style="cursor:pointer;" data-setting="language">
+                        <div style="display:flex;align-items:center;gap:12px;">
+                            <i class="fas fa-globe" style="font-size:1.2rem;color:#6C63FF;"></i>
+                            <div>
+                                <div style="font-weight:600;">Language</div>
+                                <div style="font-size:0.75rem;color:#6b7280;">English (US)</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dash-card" style="cursor:pointer;" data-setting="darkmode">
+                        <div style="display:flex;align-items:center;gap:12px;">
+                            <i class="fas fa-moon" style="font-size:1.2rem;color:#6C63FF;"></i>
+                            <div>
+                                <div style="font-weight:600;">Dark Mode</div>
+                                <div style="font-size:0.75rem;color:#6b7280;">System default</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dash-card" style="cursor:pointer;" data-setting="privacy">
+                        <div style="display:flex;align-items:center;gap:12px;">
+                            <i class="fas fa-shield-alt" style="font-size:1.2rem;color:#6C63FF;"></i>
+                            <div>
+                                <div style="font-weight:600;">Privacy</div>
+                                <div style="font-size:0.75rem;color:#6b7280;">Data controls</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dash-card" style="cursor:pointer;" data-setting="account">
+                        <div style="display:flex;align-items:center;gap:12px;">
+                            <i class="fas fa-user-cog" style="font-size:1.2rem;color:#6C63FF;"></i>
+                            <div>
+                                <div style="font-weight:600;">Account</div>
+                                <div style="font-size:0.75rem;color:#6b7280;">Manage account</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================
+            FOOTER
+            ============================================================ -->
+            <footer class="dash-footer">
+                <span>© 2026 InterviewIQ AI. All rights reserved.</span>
+                <div class="links">
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
+                    <a href="#">Support</a>
+                    <span style="color:#9ca3af;">v2.0</span>
+                </div>
+            </footer>
+
+        </main>
+    </div>
+
+    <!-- ============================================================
+    TOAST CONTAINER
+    ============================================================ -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- ============================================================
+    DASHBOARD.JS – embedded
+    ============================================================ -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js">
+    </script>
+    <script src="dashboard.js"></script>
+
+</body>
+</html>
